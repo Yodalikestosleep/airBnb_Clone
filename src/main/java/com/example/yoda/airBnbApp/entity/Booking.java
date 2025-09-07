@@ -1,5 +1,6 @@
 package com.example.yoda.airBnbApp.entity;
 
+import com.example.yoda.airBnbApp.entity.enums.BookingStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -47,6 +49,21 @@ public class Booking {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_id") //can be nullable since we wont have any data initially
+    private Payment payment;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private BookingStatus bookingStatus;
+
+    @ManyToMany(fetch=FetchType.LAZY)
+    @JoinTable(
+            name = "booking_guest",  //new table with name booking_guest
+            joinColumns = @JoinColumn(name="booking_id"), //contains booking_id and guest_id
+            inverseJoinColumns = @JoinColumn(name="guest_id")
+    )
+    private Set<Guest> guest;
 
 
 

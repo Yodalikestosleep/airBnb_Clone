@@ -20,7 +20,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY) //NOW IF we fetch room it wont fetch hotel unless we call it explicitly
     @JoinColumn(name="hotel_id",nullable = false) //inside the room its hotel_id in database
     private Hotel hotel;
 
