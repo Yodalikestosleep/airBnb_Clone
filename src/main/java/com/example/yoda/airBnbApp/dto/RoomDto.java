@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Data
 public class RoomDto {
     private Long id;
-   // private Hotel hotel; we can use Json Ignore
+    //private Hotel hotel; //we can use Json Ignore
     private String type;
     private BigDecimal basePrice;
     private String[] photos;

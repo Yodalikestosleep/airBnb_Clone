@@ -33,5 +33,23 @@ public class HotelController {
         return new ResponseEntity<>(hoteldto,HttpStatus.OK);
     }
 
+    @PutMapping
+    public ResponseEntity<HotelDto> updateHotelById(@RequestParam(required = true) Long id, @RequestBody HotelDto hotelDto){
+        HotelDto hotel = hotelService.updateHotelById(id,hotelDto);
+        return new ResponseEntity<>(hotel,HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteHotelById(@RequestParam Long id){
+        hotelService.deleteHotelById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping
+    public ResponseEntity<Void> activateHotelById(@RequestParam Long id){
+        hotelService.activateHotelById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 
 }
